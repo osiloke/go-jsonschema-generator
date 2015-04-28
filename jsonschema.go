@@ -6,6 +6,7 @@ package jsonschema
 
 import (
 	"encoding/json"
+	"log"
 	"reflect"
 	"strings"
 )
@@ -105,16 +106,18 @@ func (p *property) readFromStruct(t reflect.Type) {
 		field := t.Field(i)
 
 		tag := field.Tag.Get("json")
-		name, opts := parseTag(tag)
-		if name == "" {
-			name = field.Name
-		}
+		if tag != "" {
+			name, opts := parseTag(tag)
+			if name == "" {
+				name = field.Name
+			}
 
-		p.Properties[name] = &property{}
-		p.Properties[name].read(field.Type, opts)
+			p.Properties[name] = &property{}
+			p.Properties[name].read(field.Type, opts)
 
-		if !opts.Contains("omitempty") {
-			p.Required = append(p.Required, name)
+			if !opts.Contains("omitempty") {
+				p.Required = append(p.Required, name)
+			}
 		}
 	}
 }
