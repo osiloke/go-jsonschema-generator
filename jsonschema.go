@@ -6,7 +6,6 @@ package jsonschema
 
 import (
 	"encoding/json"
-	"log"
 	"reflect"
 	"strings"
 )
