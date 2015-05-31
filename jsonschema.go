@@ -47,7 +47,7 @@ type property struct {
 	Items                *item                `json:"items,omitempty"`
 	Properties           map[string]*property `json:"properties,omitempty"`
 	Required             []string             `json:"required,omitempty"`
-	AdditionalProperties bool                 `json:"additionalProperties,omitempty"`
+	AdditionalProperties bool                 `json:"additionalProperties"`
 }
 
 type item struct {
